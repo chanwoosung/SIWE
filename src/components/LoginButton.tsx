@@ -1,23 +1,37 @@
-import { useState } from 'react';
-import LoginDialog from './CustomDialog';
+import { CHAIN_ID } from '../constant/constant';
+import useGetWalletAddress from '../hooks/useGetWalletAddress';
+import useIsInstallMetamask from '../hooks/useIsInstallMetamask';
 
-export default function LoginButton() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function LoginButton({ buttonText }: { buttonText: string }) {
+  const { getWalletAddress, getChainId } = useGetWalletAddress();
+  const { isMetamaskInstalled } = useIsInstallMetamask();
+
+  const onClickLogin = async () => {
+    const chainId = await getChainId();
+    if (chainId === CHAIN_ID.GOERLI) {
+      const publicAddress = await getWalletAddress();
+      alert(`${publicAddress} is CONNECTED`);
+    } else {
+      alert('NETWORK를 변경해주세요');
+    }
+  };
+  const onClickRouteToMetaMask = () => {
+    window.open('https://metamask.io/download/', '_blank');
+  };
 
   return (
     <div className='w-44 h-20 rounded-xl border border-slate-500'>
       <button
         className='w-full h-full flex gap-5'
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={isMetamaskInstalled ? onClickLogin : onClickRouteToMetaMask}
       >
         <img
           src='/img/Metamask.svg'
           className='w-16 h-16 my-auto'
           alt='metamask_icon'
         />
-        <span className='my-auto'>MetaMask 연결하기</span>
+        <span className='my-auto'>{buttonText}</span>
       </button>
-      <LoginDialog isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }
