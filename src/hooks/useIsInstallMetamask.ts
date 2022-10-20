@@ -8,7 +8,7 @@ export default function useIsInstallMetamask() {
       return false;
     }
   };
-  const provider = () => async () => await detectEthereumProvider();
+  const provider = async () => await detectEthereumProvider();
   const isMetamaskInstalled = isInstalledMetamask() ? true : false;
   return { provider, isMetamaskInstalled };
 }
