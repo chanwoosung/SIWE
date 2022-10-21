@@ -11,6 +11,7 @@ export default function useGetToken() {
   const getToken = async () => {
     const fullChainId = await getChainId();
     if (window.ethereum && fullChainId === CHAIN_ID.GOERLI) {
+      console.log('here');
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const fullChainId = await getChainId();
       const signature = await getSignature();

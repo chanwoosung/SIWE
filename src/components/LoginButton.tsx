@@ -1,16 +1,11 @@
-import { CHAIN_ID } from '../constant/constant';
-import useGetWalletAddress from '../hooks/useGetWalletAddress';
 import useIsInstallMetamask from '../hooks/useIsInstallMetamask';
-import getNonce from '../services/getNonce';
-import { ethers } from 'ethers';
-import getTokens from '../services/getTokens';
 import useGetToken from '../hooks/useGetToken';
 
 export default function LoginButton({ buttonText }: { buttonText: string }) {
-  const { getWalletAddress, getChainId } = useGetWalletAddress();
   const { isMetamaskInstalled } = useIsInstallMetamask();
   const getToken = useGetToken();
   const onClickLogin = async () => {
+    console.log('work?');
     console.log(await getToken());
   };
   const onClickRouteToMetaMask = () => {
