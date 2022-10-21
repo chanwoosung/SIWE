@@ -1,9 +1,8 @@
 /// <reference types="react-scripts" />
 
 interface Window {
-  ethereum?: import('ethers').providers.ExternalProvider;
+  ethereum?: import('ethers').providers.ExternalProvider | any;
 }
-
 type ExternalProvider = {
   isMetaMask?: boolean;
   isStatus?: boolean;
