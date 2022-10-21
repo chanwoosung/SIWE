@@ -6,7 +6,7 @@ export default function useGetWalletAddress() {
     return accounts[0];
   };
   const getChainId = async () =>
-    await window.ethereum.request({ method: 'eth_chainId' });
+    await window.ethereum?.request({ method: 'eth_chainId' });
 
   return { getWalletAddress, getChainId };
 }

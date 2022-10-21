@@ -7,19 +7,24 @@ export interface IGetNonceResponse {
 }
 
 export interface IGetNonceRequestParams {
-  publicAddress: string;
+  accountAddress: string;
   chainId: number;
 }
 
 export default async function getNonce({
   chainId,
-  publicAddress,
+  accountAddress,
 }: IGetNonceRequestParams) {
   const {
     data: { nonce },
   } = await axios.get<IGetNonceResponse>(
-    `/api/wallet/nonce?account_address=${publicAddress}&chain_id=${chainId}`
-  );
+    `/api/wallet/nonce`
+  ,{
+    params:{
+      account_address:accountAddress,
+      chain_id:chainId
+    }
+  });
 
   return nonce;
 }
