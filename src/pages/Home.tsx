@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import ConnectWalletDialog from '../components/ConnectWalletDialog';
 import Header from '../components/core/Header';
-import LoginButton from '../components/LoginButton';
 import { ROUTE_PATH } from '../constant/constant';
 import useIsInstallMetamask from '../hooks/useIsInstallMetamask';
 
