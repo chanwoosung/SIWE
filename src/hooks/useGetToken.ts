@@ -17,7 +17,7 @@ export default function useGetToken() {
       const signer = provider.getSigner();
       const accountAddress = await signer.getAddress();
       const chainId = fullChainId.substring(2);
-      const { tokens } = await getTokens({
+      const tokens = await getTokens({
         accountAddress,
         chainId,
         signature,
