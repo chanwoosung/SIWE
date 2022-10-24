@@ -7,13 +7,12 @@ interface IGetOwnNFTQueryParam {
 }
 
 export default async function getOwnNFTs(
-  publicAddress: string,
   params: IGetOwnNFTQueryParam
 ) {
   const {
     data: { data },
   } = await client.get<IBaseResponse<INFTItems>>(
-    `/api/v1/public/accounts/${publicAddress}/items`,
+    `/api/v1/private/current-account/items`,
     {
       params,
     }
