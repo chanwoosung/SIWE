@@ -8,7 +8,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    if (confirm(`Are you sure you want to log out`)) {
+    if (window.confirm(`Are you sure you want to log out`)) {
       dispatch(initToken());
       dispatch(initWallet());
       localStorage.clear();

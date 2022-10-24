@@ -7,8 +7,6 @@ export default function OwnNFTList() {
   const { data, fetchNextPage, status, hasNextPage } =
     useGetOwnNFTs(publicAddress);
 
-  console.log(data);
-
   if (data?.pages[0].items.length === 0) {
     return <div>보유중인 NFT가 없습니다.</div>;
   }

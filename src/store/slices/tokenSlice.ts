@@ -17,7 +17,7 @@ export const tokenSlice = createSlice({
   initialState: tokenSliceState,
   reducers: {
     initToken: state => {
-      tokenSliceState;
+      state = tokenSliceState;
     },
     setLogin: (_state, action: PayloadAction<ITokenReducerProps>) => ({
       ...action.payload,
