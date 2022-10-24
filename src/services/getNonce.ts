@@ -17,13 +17,11 @@ export default async function getNonce({
 }: IGetNonceRequestParams) {
   const {
     data: { nonce },
-  } = await axios.get<IGetNonceResponse>(
-    `/api/wallet/nonce`
-  ,{
-    params:{
-      account_address:accountAddress,
-      chain_id:chainId
-    }
+  } = await axios.get<IGetNonceResponse>(`/api/wallet/nonce`, {
+    params: {
+      account_address: accountAddress,
+      chain_id: chainId,
+    },
   });
 
   return nonce;

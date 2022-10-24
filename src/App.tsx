@@ -1,9 +1,8 @@
-import { Suspense } from 'react';
+import { Suspense, useReducer } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { ROUTE_PATH } from './constant/constant';
 import Home from './pages/Home';
-
 function App() {
   return (
     <div className='App min-h-[100vh] bg-slate-800 flex justify-center'>
