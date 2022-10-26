@@ -21,19 +21,8 @@ client.interceptors.request.use(
       localStorage.clear();
       return Promise.reject(error);
     }
-    const newTokens = await getRefreshTokens({ refreshToken });
-    localStorage.setItem('access_token', newTokens.access_token);
-    localStorage.setItem('refresh_token', newTokens.refresh_token);
-    localStorage.setItem('expires_in', newTokens.expires_in);
-    localStorage.setItem('token_type', newTokens.token_type);
-    const dispatch = useAppDispatch();
-    dispatch(
-      setLogin({
-        accessToken: newTokens.access_token,
-        refreshToken: newTokens.refresh_token,
-        isLogin: true,
-      })
-    );
+    await getRefreshTokens({ refreshToken });
+    
     return Promise.reject(error);
   }
 );
@@ -48,11 +37,7 @@ client.interceptors.response.use(
       localStorage.clear();
       return Promise.reject(error);
     }
-    const newTokens = await getRefreshTokens({ refreshToken });
-    localStorage.setItem('access_token', newTokens.access_token);
-    localStorage.setItem('refresh_token', newTokens.refresh_token);
-    localStorage.setItem('expires_in', newTokens.expires_in);
-    localStorage.setItem('token_type', newTokens.token_type);
+    await getRefreshTokens({ refreshToken });
     return Promise.reject(error);
   }
 );
