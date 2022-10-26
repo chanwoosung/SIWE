@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import TransferDialog from '../components/TransferDialog';
 import { useGetNFTDetail } from '../hooks/useGetNFTDetail';
 import { ICollectionMetaData } from '../type';
 
 export default function NFTDetail() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { collectionAddress, tokenId } = useParams();
   const { data, status } = useGetNFTDetail(collectionAddress, tokenId);
   function instanceOfCollection(object: any): object is ICollectionMetaData {
@@ -44,7 +47,7 @@ export default function NFTDetail() {
       <div>
         <span>{data.collection?.title} is presented</span>
       </div>
-      <div className='flex flex-col gap-6'>
+      <div className='flex flex-col gap-6 px-6'>
         {Object.keys(data).map((key, index) => {
           const element = data[key as keyof typeof data];
           if (element === null) return <></>;
@@ -87,6 +90,18 @@ export default function NFTDetail() {
           }
         })}
       </div>
+      <div className='my-6 w-full px-6'>
+        <button
+          className='w-full border border-gray-900 p-6 rounded-md'
+          onClick={() => setIsDialogOpen(true)}
+        >
+          전송 버튼
+        </button>
+      </div>
+      <TransferDialog
+        isOpen={isDialogOpen}
+        setIsOpen={() => setIsDialogOpen(!isDialogOpen)}
+      />
     </div>
   );
 }
