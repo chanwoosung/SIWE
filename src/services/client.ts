@@ -22,7 +22,7 @@ client.interceptors.request.use(
       return Promise.reject(error);
     }
     await getRefreshTokens({ refreshToken });
-    
+
     return Promise.reject(error);
   }
 );

@@ -6,9 +6,7 @@ interface IGetOwnNFTQueryParam {
   perPage?: number;
 }
 
-export default async function getOwnNFTs(
-  params: IGetOwnNFTQueryParam
-) {
+export default async function getOwnNFTs(params: IGetOwnNFTQueryParam) {
   const {
     data: { data },
   } = await client.get<IBaseResponse<INFTItems>>(

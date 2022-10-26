@@ -8,7 +8,7 @@ import { setLogin } from '../store/slices/tokenSlice';
 import { setWalletAddress } from '../store/slices/walletSlice';
 
 export default function useGetToken() {
-  const { getWalletAddress,getChainId } = useGetWalletAddress();
+  const { getWalletAddress, getChainId } = useGetWalletAddress();
   const dispatch = useDispatch();
 
   const { getSignature } = useSignMessage();
