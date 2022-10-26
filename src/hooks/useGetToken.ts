@@ -8,7 +8,7 @@ import { setLogin } from '../store/slices/tokenSlice';
 import { setWalletAddress } from '../store/slices/walletSlice';
 
 export default function useGetToken() {
-  const { getChainId } = useGetWalletAddress();
+  const { getWalletAddress,getChainId } = useGetWalletAddress();
   const dispatch = useDispatch();
 
   const { getSignature } = useSignMessage();
@@ -17,6 +17,7 @@ export default function useGetToken() {
     if (window.ethereum && fullChainId === CHAIN_ID.GOERLI) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
+      const publicAddress = await getWalletAddress();
       const accountAddress = await signer.getAddress();
       const signature = await getSignature();
       const chainId = fullChainId.substring(2);
