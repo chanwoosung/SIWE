@@ -10,7 +10,7 @@ export default function NFTCard({ item }: INFTCardProps) {
     'red');
   return (
     <div className='w-full px-4 h-fit flex flex-col'>
-      <Link to={`/NFT/${item.tokenId}`}>
+      <Link to={`/NFT/${item.collectionAddress}/${item.tokenId}`}>
         <div>
           <img
             src={item.mediaUrl}

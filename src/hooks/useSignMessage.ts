@@ -3,7 +3,7 @@ import { CHAIN_ID } from '../constant/constant';
 import getNonce from '../services/getNonce';
 import useGetWalletAddress from './useGetWalletAddress';
 export default function useSignMessage() {
-  const { getWalletAddress,getChainId } = useGetWalletAddress();
+  const { getWalletAddress, getChainId } = useGetWalletAddress();
   const getSignature = async () => {
     const fullChainId = await getChainId();
     if (window.ethereum && fullChainId === CHAIN_ID.GOERLI) {
