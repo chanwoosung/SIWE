@@ -53,7 +53,7 @@ export default function NFTDetail() {
           if (element === null) return <></>;
           if (key === 'properties') {
             data[key].map((prop, int) => {
-              console.log(prop.title, prop.value);
+              // console.log(prop.title, prop.value);
               return (
                 <div
                   className='w-full border rounded-md border-black flex gap-2 p-4'
@@ -68,13 +68,13 @@ export default function NFTDetail() {
               );
             });
           } else if (key === 'collection') {
-            console.log(key);
+            // console.log(key);
             Object.keys(data[key]).map((prop, int) => {
-              console.log(prop);
+              // console.log(prop);
               return <></>;
             });
           } else {
-            console.log(key);
+            // console.log(key);
             return (
               <div
                 className='w-full border rounded-md border-black flex gap-2 p-4'
@@ -100,7 +100,10 @@ export default function NFTDetail() {
       </div>
       <TransferDialog
         isOpen={isDialogOpen}
-        setIsOpen={() => setIsDialogOpen(!isDialogOpen)}
+        setIsOpen={() => {
+          setIsDialogOpen(!isDialogOpen);
+        }}
+        NFTDetailMetaData={data}
       />
     </div>
   );
