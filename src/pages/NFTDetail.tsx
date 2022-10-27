@@ -21,7 +21,7 @@ export default function NFTDetail() {
         onError={e => {
           e.currentTarget.onerror = null;
           e.currentTarget.outerHTML =
-            '<div class="w-full bg-black text-white h-52 rounded-t-md flex flex-col items-center text-center justify-center">Cannot Not Display Image</div>';
+            '<div class="w-full bg-black text-white h-52 flex flex-col items-center text-center justify-center">Cannot Not Display Image</div>';
         }}
       />
       <div className='my-4'>

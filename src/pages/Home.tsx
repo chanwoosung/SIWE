@@ -8,7 +8,6 @@ import OwnNFTList from './OwnNFTList';
 export default function Home() {
   const { pathname } = useLocation();
   const tokenState = useAppSelector(state => state.token);
-  console.log(tokenState);
 
   return (
     <div className='w-[360px] min-h-[100vh] bg-stone-300'>
