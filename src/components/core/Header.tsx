@@ -23,7 +23,7 @@ export default function Header() {
         <Link to='/'>
           <img src='/img/Ethereum.svg' alt='header-logo' className='w-6 h-6' />
         </Link>
-        <div onClick={handleLogOut}>
+        <div onClick={handleLogOut} className='cursor-pointer'>
           <Exit fill={'white'} stroke='black' />
         </div>
       </div>

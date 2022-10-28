@@ -64,6 +64,7 @@ export default function TransferDialog({
                 validate: value => isMyAddress(value),
               })}
               placeholder='주소를 입력해주세요.'
+              className='border required:border-red-500 border-green-500 pl-2 !outline-none'
             />
             {errors.receiverAddress?.type === 'required' && (
               <p className='text-red-600'>
