@@ -2,6 +2,7 @@ import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import { useAppDispatch } from '../../store/config';
 import { initToken } from '../../store/slices/tokenSlice';
 import { initWallet } from '../../store/slices/walletSlice';
+import { ReactComponent as Exit } from '../../outline-x-circle.svg';
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -17,16 +18,14 @@ export default function Header() {
     }
   };
   return (
-    <div className='w-full h-16 bg- flex items-center justify-between my-auto px-6 backdrop-blur bg-slate-500'>
-      <Link to='/'>
-        <img src='/img/Ethereum.svg' alt='header-logo' className='w-11 h-11' />
-      </Link>
-      <div onClick={handleLogOut}>
-        <img
-          className='min-w-[24px] min-h-[24px] cursor-pointer'
-          src='/img/outline-x-circle.svg'
-          alt='cancel-dialog-button'
-        />
+    <div className='max-w-[360px] w-full h-16 fixed backdrop-blur bg-[rgb(25, 28, 31)]/[0.85] z-50'>
+      <div className='flex h-full justify-between my-auto px-6 items-center  '>
+        <Link to='/'>
+          <img src='/img/Ethereum.svg' alt='header-logo' className='w-6 h-6' />
+        </Link>
+        <div onClick={handleLogOut}>
+          <Exit fill={'white'} stroke='black' />
+        </div>
       </div>
     </div>
   );

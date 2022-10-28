@@ -1,5 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import { ReactNode } from 'react';
+import { ReactComponent as Exit } from '../../outline-x-circle.svg';
+
 interface ICustomDialogProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -55,10 +57,10 @@ function DialogTitle({
       <Dialog.Title className={'break-words'}>{title}</Dialog.Title>
       {isActiveCancel && (
         <div onClick={onClose}>
-          <img
+          <Exit
+            fill={'white'}
+            stroke='black'
             className='min-w-[24px] min-h-[24px]'
-            src='/img/outline-x-circle.svg'
-            alt='cancel-dialog-button'
           />
         </div>
       )}

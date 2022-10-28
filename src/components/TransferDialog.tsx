@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import { INFTDetailMetaData } from '../type';
 import useTransfer from '../hooks/useTransfer';
 import { useAppDispatch, useAppSelector } from '../store/config';
+import { useEffect } from 'react';
 
 export interface ITransferDialog {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export default function TransferDialog({
     register,
     handleSubmit,
     formState: { errors },
+    setFocus,
   } = useForm();
   const walletState = useAppSelector(state => state.wallet);
   const transfer = useTransfer();
@@ -34,7 +36,9 @@ export default function TransferDialog({
   const isMyAddress = (inputAddress: string) => {
     return walletState.publicAddress !== inputAddress;
   };
-
+  useEffect(() => {
+    setFocus('receiverAddress');
+  }, [setFocus]);
   return (
     <CustomDialog
       setIsOpen={setIsOpen}
@@ -43,9 +47,10 @@ export default function TransferDialog({
       isActiveCancel={true}
     >
       <CustomDialog.content>
+        <span>받을 계정의 주소를 입력해주세요.</span>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-full flex flex-col gap-5'
+          className='w-full flex flex-col gap-5 mt-2'
         >
           <>
             <input
@@ -58,6 +63,7 @@ export default function TransferDialog({
                 },
                 validate: value => isMyAddress(value),
               })}
+              placeholder='주소를 입력해주세요.'
             />
             {errors.receiverAddress?.type === 'required' && (
               <p className='text-red-600'>

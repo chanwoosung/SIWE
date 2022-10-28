@@ -10,10 +10,10 @@ export default function Home() {
   const tokenState = useAppSelector(state => state.token);
 
   return (
-    <div className='w-[360px] min-h-[100vh] bg-stone-300'>
+    <div className='w-[360px] min-h-[100vh]  bg-gradient-to-b from-slate-800 from-slate-300'>
       <Header />
       {pathname === ROUTE_PATH.HOME ? (
-        <div className='w-full flex justify-center items-center pt-5'>
+        <div className='w-full flex justify-center items-center pt-20'>
           {tokenState.accessToken ? (
             <OwnNFTList />
           ) : (
