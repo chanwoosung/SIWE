@@ -12,7 +12,7 @@ export default function useTransfer() {
     //ether.js 호출
     const NFTContract = new ethers.Contract(receiverAddress, abi, signer);
     //transfer
-    const data = await NFTContract['safeTransferFrom(address,address,uint256)'](
+    const data = await NFTContract['transferFrom(address,address,uint256)'](
       account,
       receiverAddress,
       tokenId
