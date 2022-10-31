@@ -13,7 +13,7 @@ export default function NFTDetail() {
   }
   if (data === undefined) return <></>;
   return (
-    <div className='pt-20 text-white'>
+    <div className='pt-16 text-white'>
       <div>
         <img
           src={data.mediaUrl}
