@@ -60,30 +60,7 @@ export default function NFTDetail() {
         {Object.keys(data).map((key, index) => {
           const element = data[key as keyof typeof data];
           if (element === null) return <></>;
-          if (key === 'properties') {
-            data[key].map((prop, int) => {
-              // console.log(prop.title, prop.value);
-              return (
-                <div
-                  className='w-full border rounded-md border-black flex gap-2 p-4'
-                  key={`${prop.title + int}`}
-                >
-                  <span>{prop.title.toString()}</span>
-                  <span>??</span>
-                  <span className='flex text-left break-all'>
-                    {prop.value.toString()}
-                  </span>
-                </div>
-              );
-            });
-          } else if (key === 'collection') {
-            // console.log(key);
-            Object.keys(data[key]).map((prop, int) => {
-              // console.log(prop);
-              return <></>;
-            });
-          } else {
-            // console.log(key);
+          if (key !== 'properties') {
             return (
               <>
                 <div className='border border-white rounded-xl mb-5'>
