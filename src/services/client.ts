@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useAppDispatch } from '../store/config';
-import { setLogin } from '../store/slices/tokenSlice';
 import getRefreshTokens from './getRefreshToken';
 
 const client = axios.create({
@@ -37,7 +35,28 @@ client.interceptors.response.use(
       localStorage.clear();
       return Promise.reject(error);
     }
-    await getRefreshTokens({ refreshToken });
+    getRefreshTokens({ refreshToken })
+      .then(resp => {
+        const { access_token, refresh_token } = resp.data;
+
+        localStorage.setItem('access_token', access_token);
+        localStorage.setItem('refresh_token', refresh_token);
+        return client({
+          ...error.config,
+          headers: {
+            ...error.config.headers,
+            authorization: `Bearer ${access_token as string}`,
+          },
+        });
+      })
+      .catch(error => {
+        localStorage.clear();
+        return Promise.reject(error);
+      })
+      .finally(() => {
+        window.location.reload();
+      });
+
     return Promise.reject(error);
   }
 );

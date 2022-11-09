@@ -12,7 +12,7 @@ export const walletSlice = createSlice({
   initialState: walletSliceState,
   reducers: {
     initWallet: state => {
-      state = walletSliceState;
+      state.publicAddress = '';
     },
     setWalletAddress: (state, action: PayloadAction<IWalletReducerProps>) => {
       state.publicAddress = action.payload.publicAddress;

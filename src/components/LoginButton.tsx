@@ -1,31 +1,45 @@
+import { useNavigate } from 'react-router-dom';
 import useGetToken from '../hooks/useGetToken';
-import useGetWalletAddress from '../hooks/useGetWalletAddress';
 import useIsInstallMetamask from '../hooks/useIsInstallMetamask';
-import client from '../services/client';
+import { useAppDispatch, useAppSelector } from '../store/config';
+import { logOutState } from '../store/thunk/thunksForAuth';
 
-export default function LoginButton({ buttonText }: { buttonText: string }) {
-  const { isMetamaskInstalled } = useIsInstallMetamask();
-  const { getWalletAddress } = useGetWalletAddress();
-
+export default function LoginButton({
+  buttonText,
+  className = '',
+}: {
+  buttonText: string;
+  className?: string;
+}) {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const getToken = useGetToken();
+  const { isMetamaskInstalled } = useIsInstallMetamask();
+  const { isLogin } = useAppSelector(state => state.auth);
 
   const onClickRouteToMetaMask = () => {
     window.open('https://metamask.io/download/', '_blank');
   };
-
+  const handleLogOut = () => {
+    dispatch(logOutState(navigate));
+  };
   return (
-    <div className='w-44 h-20 rounded-xl border border-slate-500'>
-      <button
-        className='w-full h-full flex gap-5'
-        onClick={isMetamaskInstalled ? getToken : onClickRouteToMetaMask}
-      >
-        <img
-          src='/img/Metamask.svg'
-          className='w-16 h-16 my-auto'
-          alt='metamask_icon'
-        />
-        <span className='my-auto'>{buttonText}</span>
-      </button>
-    </div>
+    <button
+      className={`${className} flex gap-4 w-auto rounded-md border border-transparent bg-white py-3 px-5 text-center text-base font-medium text-indigo-700 shadow-md hover:bg-gray-50 sm:w-auto`}
+      onClick={
+        isLogin
+          ? handleLogOut
+          : isMetamaskInstalled
+          ? getToken
+          : onClickRouteToMetaMask
+      }
+    >
+      <img
+        src='/img/Metamask.svg'
+        className='w-6 h-6 my-auto'
+        alt='metamask_icon'
+      />
+      <span className='my-auto'>{buttonText}</span>
+    </button>
   );
 }

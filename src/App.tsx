@@ -1,4 +1,4 @@
-import { Suspense, useReducer } from 'react';
+import { Suspense } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { ROUTE_PATH } from './constant/constant';

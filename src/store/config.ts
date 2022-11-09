@@ -1,22 +1,23 @@
 import {
+  Action,
   combineReducers,
   configureStore,
   getDefaultMiddleware,
 } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { tokenSlice } from './slices/tokenSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import persistStore from 'redux-persist/lib/persistStore';
 import { walletSlice } from './slices/walletSlice';
-const initialState = {};
+import { authSlice } from './slices/authSlice';
+import { ThunkAction } from 'redux-thunk';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['token', 'wallet'],
+  whitelist: ['auth', 'wallet'],
 };
 export const rootReducer = combineReducers({
-  token: tokenSlice.reducer,
+  auth: authSlice.reducer,
   wallet: walletSlice.reducer,
 });
 
@@ -36,5 +37,12 @@ export type AppDispatch = typeof store.dispatch;
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action
+>;
 
 export default store;

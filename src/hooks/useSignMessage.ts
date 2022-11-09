@@ -3,14 +3,13 @@ import { CHAIN_ID } from '../constant/constant';
 import getNonce from '../services/getNonce';
 import useGetWalletAddress from './useGetWalletAddress';
 export default function useSignMessage() {
-  const { getWalletAddress, getChainId } = useGetWalletAddress();
+  const { getChainId } = useGetWalletAddress();
   const getSignature = async () => {
     const fullChainId = await getChainId();
     if (window.ethereum && fullChainId === CHAIN_ID.GOERLI) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const chainId = fullChainId.substring(2);
       const signer = provider.getSigner();
-      const publicAddress = await getWalletAddress();
       const accountAddress = await signer.getAddress();
       const nonce = await getNonce({
         accountAddress,

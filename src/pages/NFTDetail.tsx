@@ -2,15 +2,11 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TransferDialog from '../components/TransferDialog';
 import { useGetNFTDetail } from '../hooks/useGetNFTDetail';
-import { ICollectionMetaData } from '../type';
 
 export default function NFTDetail() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { collectionAddress, tokenId } = useParams();
   const { data, status } = useGetNFTDetail(collectionAddress, tokenId);
-  function instanceOfCollection(object: any): object is ICollectionMetaData {
-    return 'collectionAddress' in object;
-  }
   if (data === undefined) return <></>;
   return (
     <div className='pt-16 text-white'>
@@ -22,14 +18,14 @@ export default function NFTDetail() {
           onError={e => {
             e.currentTarget.onerror = null;
             e.currentTarget.outerHTML =
-              '<div class="w-full bg-black text-white h-52 flex flex-col items-center text-center justify-center">Cannot Not Display Image</div>';
+              '<div class="w-full bg-black text-white h-52 flex flex-col items-center text-center justify-center">Can Not Display Image</div>';
           }}
         />
       </div>
       <div className='p-6'>
         <div className='border border-gray-300 rounded-md'>
           <div
-            className='w-full h-60 flex bg-opacity-5 bg-opacity-25 gap-2 rounded-lg'
+            className='w-full h-60 flex bg-opacity-25 gap-2 rounded-lg'
             style={{
               backgroundImage: `url(${data.collection?.backgroundImgUrl})`,
               backgroundSize: 'cover',
@@ -62,19 +58,17 @@ export default function NFTDetail() {
           if (element === null) return <></>;
           if (key !== 'properties') {
             return (
-              <>
-                <div className='border border-white rounded-xl mb-5'>
-                  <span className='font-extrabold'>{key}</span>
-                  <div
-                    className='w-full  rounded-md flex gap-2 p-4'
-                    key={index}
-                  >
-                    <span className='w-full flex break-all text-center items-center justify-center text-sm'>
-                      {data[key].toString()}
-                    </span>
-                  </div>
+              <div
+                className='border border-white rounded-xl mb-5'
+                key={key + '_' + index}
+              >
+                <span className='font-extrabold'>{key}</span>
+                <div className='w-full  rounded-md flex gap-2 p-4'>
+                  <span className='w-full flex break-all text-center items-center justify-center text-sm'>
+                    {data[key].toString()}
+                  </span>
                 </div>
-              </>
+              </div>
             );
           }
         })}
@@ -85,16 +79,17 @@ export default function NFTDetail() {
           <div className='columns-2 gap-6 px-6 my-6'>
             {data.properties.map((property, index) => {
               return (
-                <>
-                  <div className='border rounded-xl mb-6' key={index}>
-                    <span className='font-extrabold'>{property.title}</span>
-                    <div className='w-full rounded-md flex gap-2 p-4'>
-                      <span className='w-full flex break-all text-center items-center justify-center text-sm'>
-                        {property.value}
-                      </span>
-                    </div>
+                <div
+                  className='border rounded-xl mb-6'
+                  key={'property_' + index}
+                >
+                  <span className='font-extrabold'>{property.title}</span>
+                  <div className='w-full rounded-md flex gap-2 p-4'>
+                    <span className='w-full flex break-all text-center items-center justify-center text-sm'>
+                      {property.value}
+                    </span>
                   </div>
-                </>
+                </div>
               );
             })}
           </div>

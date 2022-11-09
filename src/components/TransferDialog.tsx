@@ -1,11 +1,9 @@
-import { useForm } from 'react-hook-form';
-import CustomDialog from './core/CustomDialog';
-import abi from '../abi.json';
-import { ethers } from 'ethers';
-import { INFTDetailMetaData } from '../type';
-import useTransfer from '../hooks/useTransfer';
-import { useAppDispatch, useAppSelector } from '../store/config';
 import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import useTransfer from '../hooks/useTransfer';
+import { useAppSelector } from '../store/config';
+import { INFTDetailMetaData } from '../type';
+import CustomDialog from './core/CustomDialog';
 
 export interface ITransferDialog {
   isOpen: boolean;
@@ -27,10 +25,12 @@ export default function TransferDialog({
   const walletState = useAppSelector(state => state.wallet);
   const transfer = useTransfer();
   const onSubmit = async (data: any) => {
+    console.log(data);
     const txData = await transfer(
       data.receiverAddress,
       NFTDetailMetaData.tokenId
     );
+    console.log(txData);
   };
 
   const isMyAddress = (inputAddress: string) => {

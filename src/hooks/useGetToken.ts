@@ -4,8 +4,8 @@ import { ethers } from 'ethers';
 import useGetWalletAddress from './useGetWalletAddress';
 import { CHAIN_ID } from '../constant/constant';
 import { useDispatch } from 'react-redux';
-import { setLogin } from '../store/slices/tokenSlice';
 import { setWalletAddress } from '../store/slices/walletSlice';
+import { logIn } from '../store/slices/authSlice';
 
 export default function useGetToken() {
   const { getWalletAddress, getChainId } = useGetWalletAddress();
@@ -36,7 +36,7 @@ export default function useGetToken() {
         })
       );
       dispatch(
-        setLogin({
+        logIn({
           accessToken: tokens.access_token,
           refreshToken: tokens.refresh_token,
           isLogin: true,

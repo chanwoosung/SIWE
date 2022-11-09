@@ -2,7 +2,11 @@
 module.exports = {
   content: ['./src/**/*.{html,js,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: { max: '639px', min: '475px' },
+      },
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/aspect-ratio')],
 };
