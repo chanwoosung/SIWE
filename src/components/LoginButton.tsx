@@ -15,7 +15,7 @@ export default function LoginButton({
   const navigate = useNavigate();
   const getToken = useGetToken();
   const { isMetamaskInstalled } = useIsInstallMetamask();
-  const { isLogin } = useAppSelector(state => state.auth);
+  const { isLoggedIn } = useAppSelector(state => state.auth);
 
   const onClickRouteToMetaMask = () => {
     window.open('https://metamask.io/download/', '_blank');
@@ -27,7 +27,7 @@ export default function LoginButton({
     <button
       className={`${className} flex gap-4 w-auto rounded-md border border-transparent bg-white py-3 px-5 text-center text-base font-medium text-indigo-700 shadow-md hover:bg-gray-50 sm:w-auto`}
       onClick={
-        isLogin
+        isLoggedIn
           ? handleLogOut
           : isMetamaskInstalled
           ? getToken

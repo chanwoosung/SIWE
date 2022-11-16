@@ -3,7 +3,7 @@ import { useAppSelector } from '../../store/config';
 import LoginButton from '../LoginButton';
 
 export default function Header() {
-  const { isLogin } = useAppSelector(state => state.auth);
+  const { isLoggedIn } = useAppSelector(state => state.auth);
 
   return (
     <div className='w-full h-20 fixed backdrop-blur bg-[rgb(25, 28, 31)]/[0.85] z-50 shadow-md'>
@@ -16,7 +16,7 @@ export default function Header() {
           />
         </Link>
         <LoginButton
-          buttonText={isLogin ? 'Disconnect Wallet' : 'Connect Wallet'}
+          buttonText={isLoggedIn ? 'Disconnect Wallet' : 'Connect Wallet'}
         />
       </div>
     </div>

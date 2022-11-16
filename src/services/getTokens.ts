@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IToken } from '../type';
 interface IGetTokensProps {
   chainId: number;
   accountAddress: string;
@@ -10,7 +11,7 @@ export default async function getTokens({
   chainId,
   signature,
 }: IGetTokensProps) {
-  const { data } = await axios.post(
+  const { data } = await axios.post<IToken>(
     '/api/oauth/token',
     {
       grantType: 'password',

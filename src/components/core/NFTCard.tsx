@@ -13,7 +13,7 @@ export default function NFTCard({ item }: INFTCardProps) {
           <div className='h-full rounded-t-md border border-solid border-white bg-slate-500'>
             <img
               src={item.mediaUrl}
-              className='pointer-events-none aspect-1 object-contain group-hover:opacity-75'
+              className='h-full m-auto pointer-events-none aspect-1 object-contain group-hover:opacity-75'
               alt='NFT_thumbnail'
               onError={e => {
                 e.currentTarget.onerror = null;
@@ -32,10 +32,10 @@ export default function NFTCard({ item }: INFTCardProps) {
           </div>
         </Link>
       </div>
-      <p className='pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900'>
+      <p className='pointer-events-none block text-sm font-medium text-gray-500'>
         {item.collectionTitle}
       </p>
-      <p className='pointer-events-none block text-sm font-medium text-gray-500'>
+      <p className='pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900'>
         {item.title}
       </p>
     </>

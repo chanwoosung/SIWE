@@ -17,7 +17,7 @@ export interface INFTItems extends IPagination {
   items: Array<INFTMetaData>;
 }
 
-export interface INFTDetailMetaData extends INFTObjectKeys {
+export interface INFTDetailMetaData {
   collection: ICollectionMetaData;
   id: string;
   accountAddress: string;
@@ -27,12 +27,5 @@ export interface INFTDetailMetaData extends INFTObjectKeys {
   title: string;
   tokenId: string;
   properties: Array<IProperty>;
-}
-export interface INFTObjectKeys {
-  [key: string]:
-    | string
-    | number
-    | ICollectionMetaData
-    | boolean
-    | Array<IProperty>;
+  createdAt: string;
 }

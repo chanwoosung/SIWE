@@ -24,14 +24,9 @@ export default function TransferDialog({
   } = useForm();
   const walletState = useAppSelector(state => state.wallet);
   const transfer = useTransfer();
-  const onSubmit = async (data: any) => {
-    console.log(data);
-    const txData = await transfer(
-      data.receiverAddress,
-      NFTDetailMetaData.tokenId
-    );
-    console.log(txData);
-  };
+  const onSubmit = handleSubmit(async data => {
+    await transfer(data.receiverAddress, NFTDetailMetaData.tokenId);
+  });
 
   const isMyAddress = (inputAddress: string) => {
     return walletState.publicAddress !== inputAddress;
@@ -47,11 +42,21 @@ export default function TransferDialog({
       isActiveCancel={true}
     >
       <CustomDialog.content>
+        <img
+          src={NFTDetailMetaData.mediaUrl}
+          className='w-full object-contain object-center '
+          alt='nft_thumbnail'
+        />
+        <div className='flex flex-col my-2'>
+          <span className='text-sm text-gray-400'>
+            {NFTDetailMetaData.collection.title}
+          </span>
+          <span className='font-extrabold text-lg'>
+            {NFTDetailMetaData.title}
+          </span>
+        </div>
         <span>받을 계정의 주소를 입력해주세요.</span>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className='w-full flex flex-col gap-5 mt-2'
-        >
+        <form onSubmit={onSubmit} className='w-full flex flex-col gap-5 mt-2'>
           <>
             <input
               {...register('receiverAddress', {
@@ -83,7 +88,9 @@ export default function TransferDialog({
               <p className='text-red-600'>{'42자가 넘었습니다.'}</p>
             )}
           </>
-          <button>전송하기</button>
+          <button className='border border-gray-900 py-2 rounded-md text-white bg-indigo-700'>
+            전송하기
+          </button>
         </form>
       </CustomDialog.content>
     </CustomDialog>

@@ -22,7 +22,7 @@ export default function OwnNFTList() {
     return <div>보유중인 NFT가 없습니다.</div>;
   }
   return (
-    <div className='w-full flex flex-col gap-6 mb-6 px-6'>
+    <div className='w-full max-w-[1440px] flex flex-col gap-6 mb-6 px-6'>
       <ul
         role='list'
         className='grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 xs:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8'
@@ -36,7 +36,7 @@ export default function OwnNFTList() {
             {data?.pages.map(({ items }) => {
               return items.map(item => {
                 return (
-                  <li key={item.mediaUrl}>
+                  <li key={item.tokenId}>
                     <NFTCard item={item} />
                   </li>
                 );

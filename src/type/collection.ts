@@ -4,8 +4,17 @@ export interface ICollectionMetaData {
   imgUrl: string;
   chain: string;
   collectionAddress: string;
-  collectionsRoyalties: [];
+  collectionRoyalties: Array<ICollectionRoyalty>;
   createdAt: string;
+  updatedAt: string;
   description: string;
   title: string;
+}
+
+export interface ICollectionRoyalty {
+  accountAddress: string;
+  chain: string;
+  collectionAddress: string;
+  id: number;
+  rate: number;
 }

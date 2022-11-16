@@ -37,10 +37,16 @@ client.interceptors.response.use(
     }
     getRefreshTokens({ refreshToken })
       .then(resp => {
-        const { access_token, refresh_token } = resp.data;
-
+        const { access_token, refresh_token, expires_in } = resp.data;
+        const currentTimestamp = new Date().getTime();
+        const refreshTokenExpiresAt =
+          currentTimestamp + Number(expires_in * 1000);
         localStorage.setItem('access_token', access_token);
         localStorage.setItem('refresh_token', refresh_token);
+        localStorage.setItem(
+          'refreshTokenExpiresAt',
+          refreshTokenExpiresAt.toString()
+        );
         return client({
           ...error.config,
           headers: {
