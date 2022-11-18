@@ -14,8 +14,13 @@ export default function useGetWalletAddress() {
     );
     return accounts[0];
   };
-  const getChainId = async () =>
-    await window.ethereum?.request({ method: 'eth_chainId' });
-
+  const getChainId = async () => {
+    try {
+      return await window.ethereum?.request({ method: 'eth_chainId' });
+    } catch (error) {
+      alert('chain Id를 가져올 수 없습니다. 다시 요청해주세요');
+      return Promise.reject(error);
+    }
+  };
   return { getWalletAddress, getChainId };
 }

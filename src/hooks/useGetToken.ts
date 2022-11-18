@@ -14,19 +14,23 @@ export default function useGetToken() {
   const getToken = useCallback(async () => {
     const fullChainId = await getChainId();
     if (window.ethereum && fullChainId === CHAIN_ID.GOERLI) {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      await getWalletAddress();
-      const accountAddress = await signer.getAddress();
-      const signature = await getSignature();
-      const chainId = fullChainId.substring(2);
-      dispatch(
-        setAuthToken({
-          accountAddress,
-          chainId,
-          signature,
-        })
-      );
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        await getWalletAddress();
+        const accountAddress = await signer.getAddress();
+        const signature = await getSignature();
+        const chainId = fullChainId.substring(2);
+        dispatch(
+          setAuthToken({
+            accountAddress,
+            chainId,
+            signature,
+          })
+        );
+      } catch (error) {
+        alert('token을 가져오는 중 에러가 발생했습니다.');
+      }
     } else {
       alert('NETWORK를 변경해주세요');
     }

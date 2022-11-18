@@ -27,7 +27,7 @@ export default function OwnNFTList() {
         className='grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 xs:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8'
       >
         {status === 'loading' && (
-          <Grid wrapperClass='w-full fixed items-center left-[45.75%] top-[50%]' />
+          <Grid wrapperClass='w-full fixed items-center left-[50%] top-[50%]' />
         )}
         {status === 'error' && (
           <div className='font-extrabold text-4xl text-center'>

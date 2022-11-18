@@ -6,7 +6,22 @@ const client = axios.create({
 });
 
 client.interceptors.request.use(
-  config => {
+  async config => {
+    const currentTimestamp = new Date().getTime();
+    if (Number(localStorage.getItem('expires_in')) - currentTimestamp < 30000) {
+      const refreshToken = localStorage.getItem('refresh_token');
+
+      refreshToken &&
+        (await getRefreshTokens({ refreshToken }).then(resp => {
+          const { access_token, refresh_token, expires_in } = resp.data;
+          const currentTimestamp = new Date().getTime();
+          const refreshTokenExpiresAt =
+            currentTimestamp + Number(expires_in * 1000);
+          localStorage.setItem('access_token', access_token);
+          localStorage.setItem('refresh_token', refresh_token);
+          localStorage.setItem('expires_in', refreshTokenExpiresAt.toString());
+        }));
+    }
     const token = localStorage.getItem('access_token');
     if (config.headers && token)
       config.headers.Authorization = `Bearer ${token}`;
@@ -42,10 +57,7 @@ client.interceptors.response.use(
           currentTimestamp + Number(expires_in * 1000);
         localStorage.setItem('access_token', access_token);
         localStorage.setItem('refresh_token', refresh_token);
-        localStorage.setItem(
-          'refreshTokenExpiresAt',
-          refreshTokenExpiresAt.toString()
-        );
+        localStorage.setItem('expires_in', refreshTokenExpiresAt.toString());
         return client({
           ...error.config,
           headers: {
