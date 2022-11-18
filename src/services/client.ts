@@ -8,9 +8,8 @@ const client = axios.create({
 client.interceptors.request.use(
   config => {
     const token = localStorage.getItem('access_token');
-    const authType = localStorage.getItem('token_type');
     if (config.headers && token)
-      config.headers.Authorization = `${authType} ${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   async error => {

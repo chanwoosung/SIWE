@@ -11,7 +11,7 @@ export const walletSlice = createSlice({
   name: 'wallet',
   initialState: walletSliceState,
   reducers: {
-    initWallet: state => {
+    resetWallet: state => {
       state.publicAddress = '';
     },
     setWalletAddress: (state, action: PayloadAction<IWalletReducerProps>) => {
@@ -20,4 +20,4 @@ export const walletSlice = createSlice({
   },
 });
 
-export const { initWallet, setWalletAddress } = walletSlice.actions;
+export const { resetWallet, setWalletAddress } = walletSlice.actions;

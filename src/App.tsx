@@ -1,9 +1,9 @@
-import './App.css';
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ROUTE_PATH } from './constant/constant';
+import './App.css';
+import { ROUTE_PATH } from './constant';
 import Home from './pages/Home';
 import NFTDetail from './pages/NFTDetail';
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './store/config';
 import { logOut } from './store/slices/authSlice';
 function App() {

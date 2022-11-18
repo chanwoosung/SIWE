@@ -1,8 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import useGetToken from '../hooks/useGetToken';
 import useIsInstallMetamask from '../hooks/useIsInstallMetamask';
 import { useAppDispatch, useAppSelector } from '../store/config';
-import { logOutState } from '../store/thunk/thunksForAuth';
+import { handleOpenDialog } from '../store/thunk/thunksForDialog';
 
 export default function LoginButton({
   buttonText,
@@ -12,7 +11,6 @@ export default function LoginButton({
   className?: string;
 }) {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const getToken = useGetToken();
   const { isMetamaskInstalled } = useIsInstallMetamask();
   const { isLoggedIn } = useAppSelector(state => state.auth);
@@ -20,15 +18,15 @@ export default function LoginButton({
   const onClickRouteToMetaMask = () => {
     window.open('https://metamask.io/download/', '_blank');
   };
-  const handleLogOut = () => {
-    dispatch(logOutState(navigate));
+  const handleShowDialog = () => {
+    dispatch(handleOpenDialog());
   };
   return (
     <button
       className={`${className} flex gap-4 w-auto rounded-md border border-transparent bg-white py-3 px-5 text-center text-base font-medium text-indigo-700 shadow-md hover:bg-gray-50 sm:w-auto`}
       onClick={
         isLoggedIn
-          ? handleLogOut
+          ? handleShowDialog
           : isMetamaskInstalled
           ? getToken
           : onClickRouteToMetaMask

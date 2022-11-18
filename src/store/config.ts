@@ -11,6 +11,7 @@ import persistStore from 'redux-persist/lib/persistStore';
 import { walletSlice } from './slices/walletSlice';
 import { authSlice } from './slices/authSlice';
 import { ThunkAction } from 'redux-thunk';
+import { dialogSlice } from './slices/dialog';
 const persistConfig = {
   key: 'root',
   storage,
@@ -19,6 +20,7 @@ const persistConfig = {
 export const rootReducer = combineReducers({
   auth: authSlice.reducer,
   wallet: walletSlice.reducer,
+  dialog: dialogSlice.reducer,
 });
 
 const perReducer = persistReducer(persistConfig, rootReducer);

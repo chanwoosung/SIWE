@@ -1,14 +1,10 @@
-import getTokens from '../services/getTokens';
-import useSignMessage from './useSignMessage';
 import { ethers } from 'ethers';
-import useGetWalletAddress from './useGetWalletAddress';
-import { CHAIN_ID } from '../constant/constant';
-import { useDispatch } from 'react-redux';
-import { setWalletAddress } from '../store/slices/walletSlice';
-import { logIn } from '../store/slices/authSlice';
 import { useCallback } from 'react';
-import { setAuthToken } from '../store/thunk/thunksForAuth';
+import { CHAIN_ID } from '../constant';
 import { useAppDispatch } from '../store/config';
+import { setAuthToken } from '../store/thunk/thunksForAuth';
+import useGetWalletAddress from './useGetWalletAddress';
+import useSignMessage from './useSignMessage';
 
 export default function useGetToken() {
   const { getWalletAddress, getChainId } = useGetWalletAddress();
@@ -20,7 +16,7 @@ export default function useGetToken() {
     if (window.ethereum && fullChainId === CHAIN_ID.GOERLI) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      const publicAddress = await getWalletAddress();
+      await getWalletAddress();
       const accountAddress = await signer.getAddress();
       const signature = await getSignature();
       const chainId = fullChainId.substring(2);

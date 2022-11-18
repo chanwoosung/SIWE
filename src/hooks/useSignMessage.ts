@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { CHAIN_ID } from '../constant/constant';
+import { CHAIN_ID } from '../constant';
 import getNonce from '../services/getNonce';
 import useGetWalletAddress from './useGetWalletAddress';
 export default function useSignMessage() {

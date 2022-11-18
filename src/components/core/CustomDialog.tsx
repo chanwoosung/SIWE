@@ -3,33 +3,29 @@ import { ReactNode } from 'react';
 import { ReactComponent as Exit } from '../../outline-x-circle.svg';
 
 interface ICustomDialogProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  open: boolean;
+  handleClose: () => void;
   title?: string;
   children?: ReactNode;
   isActiveCancel?: boolean;
 }
 
 function CustomDialog({
-  isOpen,
-  setIsOpen,
+  open,
+  handleClose,
   children,
   isActiveCancel,
   title,
 }: ICustomDialogProps) {
   return (
-    <Dialog
-      open={isOpen}
-      onClose={() => setIsOpen(false)}
-      className='relative z-50'
-    >
+    <Dialog open={!!open} onClose={handleClose} className='relative z-50'>
       <div className='w-full px-[10px] fixed inset-0 flex items-center justify-center p-4 mx-auto h-full bg-opacity-80 transition-opacity bg-gray-800'>
         <Dialog.Panel className='max-w-[340px] h-fit my-auto bg-slate-50 rounded-md p-5 flex flex-col gap-4'>
           {title && (
             <DialogTitle
               title={title}
               isActiveCancel={isActiveCancel}
-              onClose={() => setIsOpen(false)}
+              onClose={handleClose}
             />
           )}
           {children}

@@ -1,10 +1,10 @@
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetNFTDetail } from '../hooks/useGetNFTDetail';
 import uniqolor from 'uniqolor';
-import { IProperty } from '../type';
-import dayjs from 'dayjs';
 import TransferDialog from '../components/TransferDialog';
+import { useGetNFTDetail } from '../hooks/useGetNFTDetail';
+import { IProperty } from '../type';
 
 export default function NFTDetail() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

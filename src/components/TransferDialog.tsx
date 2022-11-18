@@ -31,13 +31,16 @@ export default function TransferDialog({
   const isMyAddress = (inputAddress: string) => {
     return walletState.publicAddress !== inputAddress;
   };
+
+  const handleClose = () => setIsOpen(!isOpen);
+
   useEffect(() => {
     setFocus('receiverAddress');
   }, [setFocus]);
   return (
     <CustomDialog
-      setIsOpen={setIsOpen}
-      isOpen={isOpen}
+      handleClose={handleClose}
+      open={isOpen}
       title='전송하기'
       isActiveCancel={true}
     >

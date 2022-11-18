@@ -9,13 +9,12 @@ export default function OwnNFTList() {
   const { data, isFetchingNextPage, fetchNextPage, status, hasNextPage } =
     useGetOwnNFTs();
   useEffect(() => {
-    if (!targetRef.current) return; // null => 세팅이 안됌, boolean 만으로 처리하지 않는다.
     const observer = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         !isFetchingNextPage && fetchNextPage();
       }
     });
-    observer.observe(targetRef.current);
+    targetRef.current && observer.observe(targetRef.current);
   }, [targetRef.current, data]);
   // 다 가져왔을때에대한 처리가 없음
   if (data?.pages[0].items.length === 0) {
@@ -30,7 +29,11 @@ export default function OwnNFTList() {
         {status === 'loading' && (
           <Grid wrapperClass='w-full fixed items-center left-[45.75%] top-[50%]' />
         )}
-        {status === 'error' && <div>error</div>}
+        {status === 'error' && (
+          <div className='font-extrabold text-4xl text-center'>
+            error가 발생했습니다. 잠시후 다시 시도해주세요.
+          </div>
+        )}
         {status === 'success' && (
           <>
             {data?.pages.map(({ items }) => {

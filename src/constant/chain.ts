@@ -1,8 +1,3 @@
-export const ROUTE_PATH = {
-  HOME: '/',
-  DETAIL: '/NFT/:collectionAddress/:tokenId',
-};
-
 export const CHAIN_ID = {
   MAINNET: '0x1',
   ROPSTEN: '0x3',
