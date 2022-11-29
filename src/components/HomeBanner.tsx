@@ -25,7 +25,7 @@ export default function HomeBanner() {
             </div>
           </div>
 
-          <div className='min-h-[calc(100vh-19.5rem)] lg:min-h-0 relative bg-indigo-600 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:grid lg:grid-cols-10 lg:items-center lg:rounded-3xl'>
+          <div className='min-h-[calc(100vh-18.5rem)] lg:min-h-0 relative bg-indigo-600 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:grid lg:grid-cols-10 lg:items-center lg:rounded-3xl'>
             <div
               className='absolute inset-0 hidden overflow-hidden rounded-3xl lg:block'
               aria-hidden='true'

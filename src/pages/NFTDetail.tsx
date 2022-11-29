@@ -227,7 +227,7 @@ export default function NFTDetail() {
                                               </span>
                                             </p>
                                           </div>
-                                          <div className='whitespace-nowrap text-right text-sm text-gray-500'>
+                                          <div className='whitespace-nowrap text-right text-xs text-gray-500'>
                                             {collection.chain} :
                                             {collection.rate}
                                           </div>
