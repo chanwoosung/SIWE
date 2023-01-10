@@ -2,7 +2,7 @@ import axios from 'axios';
 import getRefreshTokens from './getRefreshToken';
 
 const client = axios.create({
-  baseURL: 'https://api.goerli-alpha.croffle.me/',
+  baseURL: process.env.REACT_APP_API_SERVER,
 });
 
 client.interceptors.request.use(
